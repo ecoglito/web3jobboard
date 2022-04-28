@@ -140,6 +140,7 @@ class JobController extends Controller
             $n_favorite = new Favorite();
             $n_favorite->job_id = $id;
             $n_favorite->user_id = Auth::id();
+            
             $n_favorite->save();
             return redirect()->route('profile.index')->with('success', "Sucessfully added to your favorites.");
            

@@ -25,12 +25,14 @@
                     <tr>
                         <th>Jobs</th>
                         <th>Company</th>
+                        <th>Date Added </th>
                         <th>Remove</th>
                     </tr>
                         @foreach ($favorites as $favorite)
                             <tr>
                                 <td><a href="{{ route('jobs.comment', [ 'id' => $favorite->job->id]) }}">{{$favorite->job->body}}</a></td> 
                                 <td><a href="{{ route('companies.profile', [ 'id' => $favorite->job->company->id]) }}">{{$favorite->job->company->company}}</td>
+                                <td>{{date_format($favorite->created_at, 'n/j/Y')}} at {{date_format($favorite->created_at, 'g:i A')}}
                                 <td>
                                     <form method="POST" action="{{ route('jobs.remove_favorite', ['id' => $favorite->job->id])}}">
                                         @csrf
