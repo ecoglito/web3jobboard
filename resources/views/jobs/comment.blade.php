@@ -23,6 +23,20 @@
                     <p>Please login to see comments.
                 @elseif (count($comments) < 1)
                     <p>No comments yet! be the first to comment by using the form below. </p>
+                    <form class="mt-3" method = "post" action = "{{ route('jobs.create_comment', [ 'id' => $job->id]) }}">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <textarea
+                                name="comment"
+                                class="form-control"></textarea>
+                            @error('answer')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <button class="btn bg-green" type="submit">
+                            Add comment
+                        </button>
+                    </form>
                 @else
                     @foreach($comments as $comment)
                     <div>
@@ -48,8 +62,6 @@
                         </div>
                     </div>
                     @endforeach
-                
-      
                     <form class="mt-3" method = "post" action = "{{ route('jobs.create_comment', [ 'id' => $job->id]) }}">
                         @csrf
                         <div class="form-group mb-3">
