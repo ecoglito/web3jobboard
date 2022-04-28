@@ -32,11 +32,10 @@ class CompanyController extends Controller
         ]);
 
         $company = new Company();
-        $company->company = request('company');
+        $company->company = $request->input('company');
         $company->save();
      
         return redirect()
-
         ->route('companies.index')
         ->with('success', "Your company '{$request->input('company')}' was succesfully posted.");
     }
