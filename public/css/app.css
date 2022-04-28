@@ -1,0 +1,25 @@
+body{
+    background: black;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav {
+    background-color: green;
+}
+
+.btn-link {
+    color: white
+}
+
+.text-green {
+    color: green;
+}
+
+.bg-green {
+    background-color: green;
+    text-align: center;
+}
+
