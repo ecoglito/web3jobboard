@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     @endforeach
-                @endif
+                
       
                     <form class="mt-3" method = "post" action = "{{ route('jobs.create_comment', [ 'id' => $job->id]) }}">
                         @csrf
@@ -64,7 +64,7 @@
                             Add comment
                         </button>
                     </form>
-                    
+                @endif
                 </div>
             </div>
         </div>
