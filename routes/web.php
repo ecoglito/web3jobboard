@@ -45,6 +45,8 @@ Route::post('/companies/create', [CompanyController::class, 'create'])->name('co
 Route::get('/jobs/add', [JobController::class, 'add'])->name('jobs.add');
 //see the job listing details
 Route::get('/jobs/{id}', [JobController::class, 'comment'])->name('jobs.comment');
+//delete the job
+Route::post('/delete/{id}', [JobController::class, 'delete_job'])->name('jobs.delete_job');
 //edit the comment for the user
 Route::get('/edit_comment/{id}', [JobController::class, 'edit_comment'])->name('jobs.edit_comment');
 Route::post('/edit_comment/{id}', [JobController::class, 'update_comment'])->name('jobs.update_comment');
@@ -62,3 +64,10 @@ Route::post('/jobs/add_favorite/{id}', [JobController::class, 'add_favorite'])->
 Route::post('/jobs/remove_favorite/{id}', [JobController::class, 'remove_favorite'])->name('jobs.remove_favorite');
 
 
+use Illuminate\Support\Facades\URL;
+
+// your routes
+
+if (env('APP_ENV') !== 'local') {
+    URL::forceScheme('https');
+}

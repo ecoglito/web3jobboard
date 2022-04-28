@@ -6,6 +6,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 Use App\Models\Comment;
+Use App\Models\Job;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('edit_comment', function (User $user, Comment $comment) {
             return $user->id === $comment->user_id;
+        });
+
+        Gate::define('delete_job', function (User $user, Job $job) {
+            return $user->id === $job->user_id;
         });
 
         //

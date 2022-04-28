@@ -62,6 +62,10 @@ Edit {{$job->body}}
                     Update
                     </button>
                 </form>
+                <form action = " {{route('jobs.delete_job', ['id' => $job->id]) }}" method ="POST">
+                    @csrf
+                    <button class = "btn bg-danger" type = "submit">Delete </button>
+                </form>
         </div>
     </div>
 </div>

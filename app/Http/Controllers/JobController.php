@@ -15,9 +15,6 @@ class JobController extends Controller
 {
     public function index() {
         $jobs = Job::with(['company'])->orderBy('created_at', 'desc')->get();
-
-        
-
         return view('jobs.index', [
             'jobs' => $jobs,
         ]);
@@ -66,6 +63,23 @@ class JobController extends Controller
         //->route('questions.more', ['id' => $question->id])
         ->route('jobs.index')
         ->with('success', "Your job '{$request->input('role')}' was succesfully posted.");
+    }
+
+    public function delete_job($id) {
+        $job = Job::where(['id' => $id])->first();
+        if (Gate::allows('delete_job', $job)) {
+            $comments = Comment::where(['job_id' => $id])->get();
+            foreach ($comments as $comment) {
+                $comment->delete();
+            }
+            $job->delete();
+            return redirect()
+                ->route('jobs.index')
+                ->with('success', "Your job was succesfully deleted.");
+        }
+        else {
+            abort(403);
+        }
     }
 
     public function create_comment($id, Request $request) {
@@ -180,19 +194,18 @@ class JobController extends Controller
     }
 
     public function delete_comment($id) {
-
-       
-
         $comment = Comment::with(['job'])->where(['id' => $id])->first();
-        $comment->delete();
-
-        return redirect()
-        ->route('jobs.comment', ['id' => $comment->job])
-        ->with('success', "You've succesfully deleted this comment.");
-
         if (Gate::denies('delete_comment', $comment)) {
             abort(403);
         }
+        else {
+            $comment->delete();
+
+            return redirect()
+            ->route('jobs.comment', ['id' => $comment->job])
+            ->with('success', "You've succesfully deleted this comment.");
+        }
+      
     }
 }
 
