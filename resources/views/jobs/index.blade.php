@@ -58,11 +58,13 @@
                         @endforeach
                     </table>
                 </div>
-                <form action = "{{route('jobs.add')}}"> 
-                    <button class="btn bg-green" type="submit">
-                        Add a new job!
-                    </button>
-                </form>
+                @if (Auth::check())
+                    <form action = "{{route('jobs.add')}}"> 
+                        <button class="btn bg-green" type="submit">
+                            Add a new job!
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
 </div>
